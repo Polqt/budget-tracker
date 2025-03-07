@@ -14,10 +14,8 @@ import {
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import { toast } from 'sonner';
-import { login } from '@/app/(auth)/login/action';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { login } from '@/lib/auth-actions';
+import ToastFormWrapper from './ToastFormWrapper';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -29,9 +27,6 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
-  const router = useRouter();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,37 +35,11 @@ export default function LoginForm() {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setIsSubmitting(true);
-
-    try {
-      const formData = new FormData();
-
-      formData.append('email', values.email);
-      formData.append('password', values.password);
-
-      const result = await login(formData);
-
-      if (result?.success) {
-        toast.success(result.message);
-        router.push(result.redirectTo);
-      } else {
-        toast.error(result.error);
-      }
-    } catch (error: unknown) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'An error occurred';
-      toast.error(errorMessage);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="border py-8 px-6 rounded-lg shadow-md w-full max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back</h2>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <ToastFormWrapper action={login} className="space-y-4">
           <FormField
             control={form.control}
             name="email"
@@ -103,14 +72,10 @@ export default function LoginForm() {
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            className="w-full mt-6"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Logging in...' : 'Log in'}
+          <Button type="submit" className="w-full mt-6">
+            Log in
           </Button>
-        </form>
+        </ToastFormWrapper>
       </Form>
       <div className="text-center text-slate-900/50 text-sm mt-6">
         Don&apos;t have an account?{' '}
