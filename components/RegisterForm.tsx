@@ -16,6 +16,8 @@ import { Button } from './ui/button';
 import { toast } from 'sonner';
 import { signup } from '@/app/(auth)/register/action';
 import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -24,10 +26,15 @@ const formSchema = z.object({
   password: z.string().min(8, {
     message: 'Password must be at least 8 characters long.',
   }),
-  fullName: z.string(),
+  fullName: z.string().min(8, {
+    message: 'Full name is required',
+  }),
 });
 
 export default function RegisterForm() {
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,9 +44,32 @@ export default function RegisterForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData();
+
+      formData.append('email', values.email);
+      formData.append('password', values.password);
+      formData.append('fullName', values.fullName);
+
+      const result = await signup(formData);
+
+      if (result?.success) {
+        toast.success(result.message)
+        router.push(result.redirectTo)
+      } else {
+        toast.error(result.error)
+      }
+
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+      toast.error(errorMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="border py-8 px-6 rounded-lg shadow-md w-full max-w-md mx-auto">
@@ -51,13 +81,14 @@ export default function RegisterForm() {
             name="fullName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Full Name</FormLabel>
+                <FormLabel htmlFor="fullName">Full Name</FormLabel>
                 <FormControl>
                   <Input
                     id="fullName"
                     type="text"
                     placeholder="Poy Hidalgo"
                     className="w-full"
+                    required
                     {...field}
                   />
                 </FormControl>
@@ -70,13 +101,14 @@ export default function RegisterForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel htmlFor="email">Email</FormLabel>
                 <FormControl>
                   <Input
                     id="email"
                     type="email"
                     placeholder="poyhidalgo@example.com"
                     className="w-full"
+                    required
                     {...field}
                   />
                 </FormControl>
@@ -89,12 +121,13 @@ export default function RegisterForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel htmlFor="password">Password</FormLabel>
                 <FormControl>
                   <Input
                     id="password"
                     type="password"
                     className="w-full"
+                    required
                     {...field}
                   />
                 </FormControl>
@@ -102,23 +135,16 @@ export default function RegisterForm() {
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            className="w-full mt-6"
-            onClick={() => {
-              toast.success('Sign up successful');
-            }}
-            formAction={signup}
-          >
-            Sign Up
+          <Button type="submit" className="w-full mt-6" disabled={isSubmitting}>
+            {isSubmitting ? 'Creating account...' : 'Sign Up'}
           </Button>
         </form>
       </Form>
       <div className="text-center text-slate-900/50 text-sm mt-6">
-            Already have an account? {' '}
-            <Link href={'/login'} className='hover:text-primary font-medium'>
-                Login now
-            </Link>
+        Already have an account?{' '}
+        <Link href={'/login'} className="hover:text-primary font-medium">
+          Login now
+        </Link>
       </div>
     </div>
   );

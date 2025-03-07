@@ -1,11 +1,13 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
-
 import { createClient } from '@/utils/supabase/server'
 
-export async function login(formData: FormData) {
+type LoginResult = 
+  | { success: true; message: string, redirectTo: string }
+  | { success: false; error: string }
+
+export async function login(formData: FormData): Promise<LoginResult> {
   const supabase = await createClient()
 
   // type-casting here for convenience
@@ -18,10 +20,14 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data)
 
   if (error) {
-    redirect('/error')
+    return { success: false, error: error.message }
   }
 
   revalidatePath('/login', 'layout')
-  redirect('/dashboard')
+  return {
+    success: true,
+    message: 'You have successfully logged in!',
+    redirectTo: '/dashboard'
+  }
 }
 

@@ -16,6 +16,8 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { login } from '@/app/(auth)/login/action';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -27,6 +29,9 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,9 +40,31 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData();
+
+      formData.append('email', values.email);
+      formData.append('password', values.password);
+
+      const result = await login(formData);
+
+      if (result?.success) {
+        toast.success(result.message);
+        router.push(result.redirectTo);
+      } else {
+        toast.error(result.error);
+      }
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'An error occurred';
+      toast.error(errorMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="border py-8 px-6 rounded-lg shadow-md w-full max-w-md mx-auto">
@@ -79,12 +106,9 @@ export default function LoginForm() {
           <Button
             type="submit"
             className="w-full mt-6"
-            onClick={() => {
-              toast.success('Login successful');
-            }}
-            formAction={login}
+            disabled={isSubmitting}
           >
-            Login
+            {isSubmitting ? 'Logging in...' : 'Log in'}
           </Button>
         </form>
       </Form>
