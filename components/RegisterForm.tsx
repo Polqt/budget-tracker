@@ -13,9 +13,9 @@ import {
 } from './ui/form';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import Link from 'next/link';
 import { toast } from 'sonner';
-import { login } from '@/app/(auth)/login/action';
+import { signup } from '@/app/(auth)/register/action';
+import Link from 'next/link';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -24,14 +24,16 @@ const formSchema = z.object({
   password: z.string().min(8, {
     message: 'Password must be at least 8 characters long.',
   }),
+  fullName: z.string(),
 });
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
       password: '',
+      fullName: '',
     },
   });
 
@@ -41,9 +43,28 @@ export default function LoginForm() {
 
   return (
     <div className="border py-8 px-6 rounded-lg shadow-md w-full max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Sign up</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="fullName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Full Name</FormLabel>
+                <FormControl>
+                  <Input
+                    id="fullName"
+                    type="text"
+                    placeholder="Poy Hidalgo"
+                    className="w-full"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="email"
@@ -70,7 +91,12 @@ export default function LoginForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input id="password" type="password" {...field} />
+                  <Input
+                    id="password"
+                    type="password"
+                    className="w-full"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -80,19 +106,19 @@ export default function LoginForm() {
             type="submit"
             className="w-full mt-6"
             onClick={() => {
-              toast.success('Login successful');
+              toast.success('Sign up successful');
             }}
-            formAction={login}
+            formAction={signup}
           >
-            Login
+            Sign Up
           </Button>
         </form>
       </Form>
       <div className="text-center text-slate-900/50 text-sm mt-6">
-        Don&apos;t have an account?{' '}
-        <Link href={'/register'} className="hover:text-primary font-medium">
-          Register now
-        </Link>
+            Already have an account? {' '}
+            <Link href={'/login'} className='hover:text-primary font-medium'>
+                Login now
+            </Link>
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import { Toaster } from 'sonner';
+
 export default function AuthenticationLayout({
   children,
 }: Readonly<{
@@ -5,7 +7,10 @@ export default function AuthenticationLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster position="top-right" richColors />
+      </body>
     </html>
   );
 }
