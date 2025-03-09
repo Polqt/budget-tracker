@@ -1,3 +1,5 @@
+'use client'
+
 import DashboardHeader from './DashboardHeader';
 import Sidebar from './Sidebar';
 

@@ -2,6 +2,7 @@ import { Bell, Plus, Search } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import DashboardContent from './DashboardContent';
+import { Avatar, AvatarFallback } from './ui/avatar';
 
 export default function DashboardHeader() {
   return (
@@ -20,11 +21,12 @@ export default function DashboardHeader() {
               <Plus className="mr-2 w-4 h-4" />
               Add Transaction
             </Button>
-            <Button variant={'ghost'} size={'icon'} className='relative'>
-                <Bell className='w-5 h-5' />
-                <span className='absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full'></span>
+            <Button variant={'ghost'} size={'icon'} className="relative">
+              <Bell className="w-5 h-5" />
             </Button>
-            <div className='w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium'>          </div>
+            <Avatar>
+              <AvatarFallback>{}</AvatarFallback>
+            </Avatar>
           </div>
         </div>
       </header>
