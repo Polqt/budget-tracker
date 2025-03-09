@@ -27,21 +27,21 @@ export default function About() {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white min-h-screen">
-      <div className="container mx-auto py-16 px-4">
-        <section className="mb-24">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="flex flex-col space-y-6">
+    <div className="bg-gradient-to-b from-gray-50 to-white min-h-screen overflow-x-hidden">
+      <div className="px-4 py-8 w-full">
+        <section className="mb-16">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="flex flex-col space-y-4">
               <Badge
                 variant="outline"
                 className="bg-green-50 text-green-700 border-green-200 w-fit px-4 py-1 rounded-full text-sm font-medium"
               >
                 Your Financial Companion
               </Badge>
-              <h1 className="text-5xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-4xl font-bold text-gray-900 leading-tight">
                 About <span className="text-green-600">BudgetBuddy</span>
               </h1>
-              <p className="text-xl text-gray-600">
+              <p className="text-lg text-gray-600">
                 Your personal finance companion that makes budgeting simple,
                 insightful, and genuinely enjoyable.
               </p>
@@ -84,7 +84,7 @@ export default function About() {
               <div className="absolute -top-20 -right-20 w-64 h-64 bg-green-100 rounded-full opacity-50 blur-3xl"></div>
               <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 via-green-600 to-green-400"></div>
-                <div className="p-8">
+                <div className="p-6">
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <div className="text-xs text-gray-500 mb-1">
@@ -136,15 +136,15 @@ export default function About() {
         </section>
 
         {/* Stats Bar */}
-        <section className="mb-24">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-white rounded-xl shadow-lg border border-gray-100">
-            <div className="flex flex-col items-center p-4 border-r border-gray-100">
+        <section className="mb-16">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="flex flex-col items-center p-4 md:border-r border-gray-100">
               <div className="text-4xl font-bold text-green-600 mb-2">94%</div>
               <div className="text-gray-600 text-center">
                 of users report better financial awareness
               </div>
             </div>
-            <div className="flex flex-col items-center p-4 border-r border-gray-100">
+            <div className="flex flex-col items-center p-4 md:border-r border-gray-100">
               <div className="text-4xl font-bold text-green-600 mb-2">30+</div>
               <div className="text-gray-600 text-center">
                 financial insights provided monthly
@@ -158,12 +158,21 @@ export default function About() {
                 saved by our users collectively
               </div>
             </div>
+
+            <div className="flex flex-col items-center p-4">
+              <div className="text-4xl font-bold text-green-600 mb-2">
+                4.9/5
+              </div>
+              <div className="text-gray-600 text-center">
+                average user satisfaction rating
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Mission Section */}
-        <section className="mb-24">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <section className="mb-16">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="order-2 md:order-1">
               <Card className="border-none shadow-xl hover:shadow-2xl transition-shadow duration-300">
                 <CardHeader className="pb-4">
@@ -217,22 +226,22 @@ export default function About() {
         </section>
 
         {/* Key Features Section */}
-        <section className="mb-24">
-          <div className="text-center mb-14">
+        <section className="mb-16">
+          <div className="text-center mb-10">
             <Badge
               variant="outline"
               className="bg-green-50 text-green-700 border-green-200 mb-4 px-4 py-1 rounded-full text-sm font-medium"
             >
               What I Offer
             </Badge>
-            <h2 className="text-4xl font-bold mb-6">Key Features</h2>
+            <h2 className="text-3xl font-bold mb-4">Key Features</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               BudgetBuddy provides all the tools you need to manage your
               finances effectively
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             <Card className="group border-t-4 border-t-green-500 shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-b from-green-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <CardHeader>
@@ -321,22 +330,19 @@ export default function About() {
           </div>
         </section>
 
-        {/* Testimonial */}
-        <section className="mb-24"></section>
-
         {/* CTA Section */}
-        <section className="rounded-2xl bg-gradient-to-r from-green-600 to-green-700 text-white p-12 shadow-lg relative overflow-hidden">
+        <section className="rounded-2xl bg-gradient-to-r from-green-600 to-green-700 text-white p-8 shadow-lg relative overflow-hidden mb-16">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
 
-          <div className="max-w-3xl mx-auto text-center space-y-6 relative z-10">
+          <div className="max-w-3xl mx-auto text-center space-y-4 relative z-10">
             <Badge className="bg-green-700 text-white border-green-500 mb-4 px-4 py-1 rounded-full text-sm font-medium">
               Take Action Today
             </Badge>
-            <h2 className="text-4xl font-bold">
+            <h2 className="text-3xl font-bold">
               Ready to Take Control of Your Finances?
             </h2>
-            <p className="text-white/90 text-lg mb-8">
+            <p className="text-white/90 text-lg mb-6">
               Join thousands of users who have transformed their financial
               habits with BudgetBuddy.
             </p>
@@ -346,7 +352,7 @@ export default function About() {
               </Button>
               <Button
                 variant="outline"
-                className="border-white text-green-700 hover:bg-green-700 transition-all"
+                className="border-white text-white hover:bg-green-700 transition-all"
               >
                 View Plans
               </Button>
@@ -359,7 +365,7 @@ export default function About() {
         </section>
 
         {/* FAQ Teaser */}
-        <section className="mt-24 text-center">
+        <section className="text-center mb-12">
           <Badge
             variant="outline"
             className="bg-green-50 text-green-700 border-green-200 mb-4 px-4 py-1 rounded-full text-sm font-medium"
@@ -378,8 +384,8 @@ export default function About() {
         </section>
 
         {/* Footer Accent */}
-        <hr className=" mt-24 h-px bg-gradient-to-r from-transparent via-green-200 to-transparent" />
-        <div className="pt-8 text-center text-sm text-gray-500">
+        <hr className="h-px bg-gradient-to-r from-transparent via-green-200 to-transparent" />
+        <div className="py-6 text-center text-sm text-gray-500">
           © 2025 BudgetBuddy. All rights reserved.
         </div>
       </div>
