@@ -19,7 +19,7 @@ export default function AppSidebar() {
   const navigations = [
     { name: 'Dashboard', href: '/dashboard', icon: Home },
     { name: 'Categories', href: '/categories', icon: PieChart },
-    { name: 'Transactions', href: '/transaction', icon: ListOrdered },
+    { name: 'Transactions', href: '/transactions', icon: ListOrdered },
     { name: 'Settings', href: '/settings', icon: Settings, collapsible: true }, // TODO: Add sub navigation
     { name: 'About', href: '/about', icon: Info },
   ];
