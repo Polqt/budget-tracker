@@ -255,8 +255,9 @@ export default function About() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">
-                  Easily track your expenses across multiple categories and
-                  accounts. Get real-time updates on where your money is going.
+                  Create custom budgets for different categories and track your
+                  progress. Set specific goals and get notified when you reach
+                  them.
                 </p>
               </CardContent>
               <CardFooter>
@@ -314,8 +315,9 @@ export default function About() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">
-                  Gain insights through intuitive charts and graphs that make
-                  your financial data easy to understand and act upon.
+                  Create custom budgets for different categories and track your
+                  progress. Set specific goals and get notified when you reach
+                  them.
                 </p>
               </CardContent>
               <CardFooter>
@@ -350,10 +352,7 @@ export default function About() {
               <Button className="bg-white text-green-700 hover:bg-gray-100 shadow-md hover:shadow-lg transition-all">
                 Get Started Now
               </Button>
-              <Button
-                variant="outline"
-                className="border-white text-white hover:bg-green-700 transition-all"
-              >
+              <Button className="bg-white text-green-700 hover:bg-gray-100 shadow-md hover:shadow-lg transition-all">
                 View Plans
               </Button>
             </div>
