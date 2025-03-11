@@ -1,5 +1,6 @@
 import CategoriesContent from './CategoriesContent';
 import CategoriesHeader from './CategoriesHeader';
+import CategoriesList from './CategoriesList';
 import CategoriesTip from './CategoriesTip';
 
 export default function Categories() {
@@ -8,6 +9,7 @@ export default function Categories() {
       <div className="max-w-6xl mx-auto">
         <CategoriesHeader />
         <CategoriesContent />
+        <CategoriesList />
         <CategoriesTip />
       </div>
     </div>
