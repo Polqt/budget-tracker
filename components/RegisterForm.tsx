@@ -12,10 +12,8 @@ import {
   FormMessage,
 } from './ui/form';
 import { Input } from './ui/input';
-import { Button } from './ui/button';
 import Link from 'next/link';
 import { signup } from '@/lib/auth-actions';
-import ToastFormWrapper from './ToastFormWrapper';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -43,70 +41,75 @@ export default function RegisterForm() {
     <div className="border py-8 px-6 rounded-lg shadow-md w-full max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-6 text-center">Sign up</h2>
       <Form {...form}>
-        <ToastFormWrapper action={signup} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="fullName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="fullName">Full Name</FormLabel>
-                <FormControl>
-                  <Input
-                    id="fullName"
-                    type="text"
-                    placeholder="Poy Hidalgo"
-                    className="w-full"
-                    required
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <FormControl>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="poyhidalgo@example.com"
-                    className="w-full"
-                    required
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <FormControl>
-                  <Input
-                    id="password"
-                    type="password"
-                    className="w-full"
-                    required
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" className="w-full mt-6">
-            Sign up
-          </Button>
-        </ToastFormWrapper>
+        <FormField
+          control={form.control}
+          name="fullName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="fullName">Full Name</FormLabel>
+              <FormControl>
+                <Input
+                  id="fullName"
+                  type="text"
+                  placeholder="Poy Hidalgo"
+                  className="w-full"
+                  required
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormControl>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="poyhidalgo@example.com"
+                  className="w-full"
+                  required
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormControl>
+                <Input
+                  id="password"
+                  type="password"
+                  className="w-full"
+                  required
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <button 
+          title='register'
+          type="submit"
+          formAction={async (formData) => {
+            await signup(formData);
+          }} 
+          className="w-full mt-6"
+          >
+          Sign up
+        </button>
       </Form>
       <div className="text-center text-slate-900/50 text-sm mt-6">
         Already have an account?{' '}

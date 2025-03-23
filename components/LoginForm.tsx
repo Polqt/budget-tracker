@@ -12,10 +12,11 @@ import {
   FormMessage,
 } from './ui/form';
 import { Input } from './ui/input';
-import { Button } from './ui/button';
 import Link from 'next/link';
 import { login } from '@/lib/auth-actions';
-import ToastFormWrapper from './ToastFormWrapper';
+import { Button } from './ui/button';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -27,6 +28,10 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const router = useRouter();
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,11 +40,40 @@ export default function LoginForm() {
     },
   });
 
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setLoading(true);
+      setError('');
+
+      const formData = new FormData();
+      formData.append('email', values.email);
+      formData.append('password', values.password);
+
+      const result = await login(formData);
+
+      if (result.success) {
+        if (result.redirectTo) router.push(result.redirectTo);
+      } else {
+        setError(result.message);
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again.');
+      console.error('Failed to login', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="border py-8 px-6 rounded-lg shadow-md w-full max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back</h2>
+      {error && (
+        <div role='alert' className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4'>
+          <span className='text-sm'>{error}</span>
+        </div>
+      )}
       <Form {...form}>
-        <ToastFormWrapper action={login} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-6'>
           <FormField
             control={form.control}
             name="email"
@@ -72,10 +106,13 @@ export default function LoginForm() {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full mt-6">
-            Log in
+          <Button
+            disabled={isLoading}
+            className="w-full mt-4"
+          >
+            {isLoading ? 'Logging in...' : 'Log in'}
           </Button>
-        </ToastFormWrapper>
+        </form>
       </Form>
       <div className="text-center text-slate-900/50 text-sm mt-6">
         Don&apos;t have an account?{' '}
