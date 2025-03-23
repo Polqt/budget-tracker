@@ -29,7 +29,7 @@ const formSchema = z.object({
 
 export default function LoginForm() {
   const router = useRouter();
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,7 +42,7 @@ export default function LoginForm() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       setError('');
 
       const formData = new FormData();
@@ -60,7 +60,7 @@ export default function LoginForm() {
       setError('An error occurred. Please try again.');
       console.error('Failed to login', error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -73,7 +73,7 @@ export default function LoginForm() {
         </div>
       )}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-6'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <FormField
             control={form.control}
             name="email"
