@@ -27,7 +27,7 @@ export async function login(formData: FormData){
   return {
     success: true,
     message: 'Login successful',
-    redirectTo: '/private'
+    redirectTo: '/dashboard'
   }
 }
 
