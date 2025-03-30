@@ -1,4 +1,4 @@
-import { ChevronUp, Home, User2 } from 'lucide-react';
+import { ChevronUp, CreditCard, Folder, Home, Info, User2 } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -16,6 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+import { logout } from '@/lib/auth-actions';
 
 const items = [
   {
@@ -26,17 +27,17 @@ const items = [
   {
     title: 'Transaction',
     url: '/transaction',
-    icon: Home,
+    icon: CreditCard,
   },
   {
     title: 'Categories',
     url: '/categories',
-    icon: Home,
+    icon: Folder,
   },
   {
     title: 'About',
     url: '/about',
-    icon: Home,
+    icon: Info,
   },
 ];
 
@@ -47,7 +48,7 @@ function SidebarComponent() {
         <SidebarContent>
           <SidebarGroup>
             <SidebarHeader className="font-bold text-2xl">
-              Budget Buddy
+              BudgetBuddy
             </SidebarHeader>
             <SidebarGroupContent>
               <SidebarMenu>
@@ -73,19 +74,24 @@ function SidebarComponent() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
-                    <User2 /> {null}
+                    <User2 /> Username
                     <ChevronUp className="ml-auto" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   side="top"
-                  className="w-[--radix-proper-anchor-width]"
+                  className="w-[--radix-popper-anchor-width]"
                 >
                   <DropdownMenuItem>
                     <span>Account</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <span>Signout</span>
+                    <span>Billing</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <form action={logout}>
+                      <button type="submit">Sign out</button>
+                    </form>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
