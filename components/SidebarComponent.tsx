@@ -1,3 +1,5 @@
+'use client';
+
 import { ChevronUp, CreditCard, Folder, Home, Info, User2 } from 'lucide-react';
 import {
   Sidebar,
@@ -17,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
 import { logout } from '@/lib/auth-actions';
+import { useUser } from '@/hooks/use-user';
 
 const items = [
   {
@@ -42,6 +45,9 @@ const items = [
 ];
 
 function SidebarComponent() {
+  const user = useUser();
+  const displayName = user?.user_metadata?.full_name;
+
   return (
     <div>
       <Sidebar>
@@ -52,9 +58,12 @@ function SidebarComponent() {
             </SidebarHeader>
             <SidebarGroupContent>
               <SidebarMenu>
-                <SidebarMenuItem className="space-y-4 mt-2">
+                <>
                   {items.map(item => (
-                    <SidebarMenuItem key={item.title}>
+                    <SidebarMenuItem
+                      key={item.title}
+                      className="space-y-4 mt-2"
+                    >
                       <SidebarMenuButton asChild>
                         <a href={item.url}>
                           <item.icon size={24} />
@@ -63,7 +72,7 @@ function SidebarComponent() {
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
-                </SidebarMenuItem>
+                </>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
@@ -74,7 +83,7 @@ function SidebarComponent() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
-                    <User2 /> Username
+                    <User2 /> {displayName}
                     <ChevronUp className="ml-auto" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>

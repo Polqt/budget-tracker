@@ -6,11 +6,9 @@ export default function AuthenticationLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        {children}
-        <Toaster position="top-right" richColors />
-      </body>
-    </html>
+    <>
+      {children}
+      <Toaster position="top-right" richColors />
+    </>
   );
 }
