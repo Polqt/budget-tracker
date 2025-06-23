@@ -7,14 +7,14 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <SidebarProvider>
+    <SidebarProvider>
+      <div className="flex min-h-screen w-full">
         <SidebarComponent />
-        <main>
+        <main className="w-full">
           <SidebarTrigger />
           {children}
         </main>
-      </SidebarProvider>
-    </>
+      </div>
+    </SidebarProvider>
   );
 }
