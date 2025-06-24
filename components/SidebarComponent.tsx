@@ -91,12 +91,6 @@ function SidebarComponent() {
                   side="top"
                   className="w-[--radix-popper-anchor-width]"
                 >
-                  <DropdownMenuItem>
-                    <span>Account</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <span>Billing</span>
-                  </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <form action={logout}>
                       <button type="submit">Sign out</button>
