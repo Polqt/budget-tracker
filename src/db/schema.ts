@@ -23,7 +23,7 @@ export const categories = pgTable('categories', {
   type: typeEnum('type').notNull(),
   userId: uuid('user_id')
     .notNull()
-    .references(() => profile.id, { onDelete: 'cascade' }), // 👈 FK!
+    .references(() => profile.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at').defaultNow(),
 });
 
@@ -35,9 +35,16 @@ export const transactions = pgTable('transactions', {
   date: date('date').notNull(),
   userId: uuid('user_id')
     .notNull()
-    .references(() => profile.id, { onDelete: 'cascade' }), 
+    .references(() => profile.id, { onDelete: 'cascade' }),
   categoryId: uuid('category_id')
     .notNull()
-    .references(() => categories.id, { onDelete: 'cascade' }), 
+    .references(() => categories.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at').defaultNow(),
 });
+
+export const schema = {
+  profile,
+  categories,
+  transactions,
+  typeEnum,
+};
