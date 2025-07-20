@@ -1,40 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 
 interface Category {
-    name: string;
-    type: string;
-    icon: string;
-    color: string;
+  name: string;
+  type: string;
+  icon: string;
+  color: string;
 }
 
 interface AddCategoryModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onAdd: (category: Category) => void;
+  isOpen: boolean;
+  onClose: () => void;
+  onAdd?: (category: Category) => void;
 }
 
-export default function AddCategoryModal({ isOpen, onClose, onAdd }: AddCategoryModalProps) {
-  const [newCategory, setNewCategory] = useState<Category>({
-    name: '',
-    type: '',
-    icon: '',
-    color: '',
-  });
-
-  const handleAdd = () => {
-    onAdd(newCategory);
-    setNewCategory({
-      name: '',
-      type: 'expense',
-      icon: 'other',
-      color: '#3B82F6',
-    });
-    onClose();
-  };
-
+export default function AddCategoryModal({
+  isOpen,
+  onClose,
+}: AddCategoryModalProps) {
   if (!isOpen) return null;
 
   return (
@@ -43,10 +28,12 @@ export default function AddCategoryModal({ isOpen, onClose, onAdd }: AddCategory
         <CardHeader>
           <CardTitle className="flex justify-between items-center">
             Add New Category
-            <button onClick={onClose}></button>
+            <button onClick={onClose}>×</button>
           </CardTitle>
         </CardHeader>
-        <CardContent></CardContent>
+        <CardContent>
+          <p>Category form would be implemented here...</p>
+        </CardContent>
       </Card>
     </div>
   );
