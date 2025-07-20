@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Shield, 
-  Zap, 
-  PieChart, 
-  Smartphone, 
-  Lock, 
-  TrendingUp, 
+import {
+  Shield,
+  Zap,
+  PieChart,
+  Smartphone,
+  Lock,
+  TrendingUp,
   Github,
   Mail,
   Globe,
@@ -18,7 +18,7 @@ import {
   Rocket,
   Coffee,
   Lightbulb,
-  ArrowRight
+  ArrowRight,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -30,9 +30,9 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const itemVariants = {
@@ -41,90 +41,147 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5
-    }
-  }
+      duration: 0.5,
+    },
+  },
 };
 
 export default function About() {
   const features = [
     {
       icon: <PieChart className="w-6 h-6" />,
-      title: "Smart Analytics",
-      description: "AI-powered insights into your spending patterns with predictive analytics and personalized recommendations.",
-      color: "from-blue-500 to-cyan-500"
+      title: 'Smart Analytics',
+      description:
+        'AI-powered insights into your spending patterns with predictive analytics and personalized recommendations.',
+      color: 'from-blue-500 to-cyan-500',
     },
     {
       icon: <Shield className="w-6 h-6" />,
-      title: "Enterprise Security",
-      description: "Military-grade encryption with zero-knowledge architecture. Your data is secure by design.",
-      color: "from-green-500 to-emerald-500"
+      title: 'Enterprise Security',
+      description:
+        'Military-grade encryption with zero-knowledge architecture. Your data is secure by design.',
+      color: 'from-green-500 to-emerald-500',
     },
     {
       icon: <Zap className="w-6 h-6" />,
-      title: "Lightning Fast",
-      description: "Real-time synchronization across all devices with offline-first architecture for seamless experience.",
-      color: "from-yellow-500 to-orange-500"
+      title: 'Lightning Fast',
+      description:
+        'Real-time synchronization across all devices with offline-first architecture for seamless experience.',
+      color: 'from-yellow-500 to-orange-500',
     },
     {
       icon: <Smartphone className="w-6 h-6" />,
-      title: "Cross-Platform",
-      description: "Progressive Web App with native mobile experience. One codebase, everywhere access.",
-      color: "from-purple-500 to-violet-500"
+      title: 'Cross-Platform',
+      description:
+        'Progressive Web App with native mobile experience. One codebase, everywhere access.',
+      color: 'from-purple-500 to-violet-500',
     },
     {
       icon: <TrendingUp className="w-6 h-6" />,
-      title: "Goal Achievement",
-      description: "Smart goal tracking with ML-powered predictions and automated milestone celebrations.",
-      color: "from-pink-500 to-rose-500"
+      title: 'Goal Achievement',
+      description:
+        'Smart goal tracking with ML-powered predictions and automated milestone celebrations.',
+      color: 'from-pink-500 to-rose-500',
     },
     {
       icon: <Lock className="w-6 h-6" />,
-      title: "Privacy First",
-      description: "GDPR compliant with local-first data storage. You own your data, we protect it.",
-      color: "from-indigo-500 to-blue-500"
-    }
+      title: 'Privacy First',
+      description:
+        'GDPR compliant with local-first data storage. You own your data, we protect it.',
+      color: 'from-indigo-500 to-blue-500',
+    },
   ];
 
   const techStack = [
-    { name: "Next.js 15", description: "React Framework", icon: "⚛️", color: "bg-black" },
-    { name: "React 19", description: "UI Library", icon: "🔧", color: "bg-blue-600" },
-    { name: "TypeScript", description: "Type Safety", icon: "🛡️", color: "bg-blue-700" },
-    { name: "Tailwind CSS", description: "Styling", icon: "🎨", color: "bg-cyan-500" },
-    { name: "Framer Motion", description: "Animations", icon: "✨", color: "bg-purple-600" },
-    { name: "Supabase", description: "Backend", icon: "🗄️", color: "bg-green-600" },
-    { name: "Drizzle ORM", description: "Database", icon: "🔄", color: "bg-orange-500" },
-    { name: "Zod", description: "Validation", icon: "✅", color: "bg-red-500" }
+    {
+      name: 'Next.js 15',
+      description: 'React Framework',
+      icon: '⚛️',
+      color: 'bg-black',
+    },
+    {
+      name: 'React 19',
+      description: 'UI Library',
+      icon: '🔧',
+      color: 'bg-blue-600',
+    },
+    {
+      name: 'TypeScript',
+      description: 'Type Safety',
+      icon: '🛡️',
+      color: 'bg-blue-700',
+    },
+    {
+      name: 'Tailwind CSS',
+      description: 'Styling',
+      icon: '🎨',
+      color: 'bg-cyan-500',
+    },
+    {
+      name: 'Framer Motion',
+      description: 'Animations',
+      icon: '✨',
+      color: 'bg-purple-600',
+    },
+    {
+      name: 'Supabase',
+      description: 'Backend',
+      icon: '🗄️',
+      color: 'bg-green-600',
+    },
+    {
+      name: 'Drizzle ORM',
+      description: 'Database',
+      icon: '🔄',
+      color: 'bg-orange-500',
+    },
+    { name: 'Zod', description: 'Validation', icon: '✅', color: 'bg-red-500' },
   ];
 
   const principles = [
     {
       icon: <Code className="w-5 h-5" />,
-      title: "Clean Architecture",
-      description: "SOLID principles, modular design, and maintainable code"
+      title: 'Clean Architecture',
+      description: 'SOLID principles, modular design, and maintainable code',
     },
     {
       icon: <Shield className="w-5 h-5" />,
-      title: "Security First",
-      description: "Input validation, sanitization, and secure authentication"
+      title: 'Security First',
+      description: 'Input validation, sanitization, and secure authentication',
     },
     {
       icon: <Rocket className="w-5 h-5" />,
-      title: "Performance",
-      description: "Optimized loading, caching, and responsive design"
+      title: 'Performance',
+      description: 'Optimized loading, caching, and responsive design',
     },
     {
       icon: <Heart className="w-5 h-5" />,
-      title: "User Experience",
-      description: "Intuitive interface with accessibility in mind"
-    }
+      title: 'User Experience',
+      description: 'Intuitive interface with accessibility in mind',
+    },
   ];
 
   const stats = [
-    { number: "15+", label: "Modern Technologies", icon: <Zap className="w-5 h-5" /> },
-    { number: "100%", label: "Type Safety", icon: <Shield className="w-5 h-5" /> },
-    { number: "0", label: "Security Vulnerabilities", icon: <Lock className="w-5 h-5" /> },
-    { number: "∞", label: "Scalability", icon: <TrendingUp className="w-5 h-5" /> }
+    {
+      number: '15+',
+      label: 'Modern Technologies',
+      icon: <Zap className="w-5 h-5" />,
+    },
+    {
+      number: '100%',
+      label: 'Type Safety',
+      icon: <Shield className="w-5 h-5" />,
+    },
+    {
+      number: '0',
+      label: 'Security Vulnerabilities',
+      icon: <Lock className="w-5 h-5" />,
+    },
+    {
+      number: '∞',
+      label: 'Scalability',
+      icon: <TrendingUp className="w-5 h-5" />,
+    },
   ];
 
   return (
@@ -137,10 +194,7 @@ export default function About() {
           animate="visible"
           className="text-center space-y-8"
         >
-          <motion.div
-            variants={itemVariants}
-            className="relative"
-          >
+          <motion.div variants={itemVariants} className="relative">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-32 h-32 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full opacity-20 animate-pulse"></div>
             </div>
@@ -157,17 +211,24 @@ export default function About() {
               BudgetTracker Pro
             </h1>
             <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
-              A next-generation personal finance management platform built with cutting-edge technology,
-              enterprise-grade security, and user-centric design principles.
+              A next-generation personal finance management platform built with
+              cutting-edge technology, enterprise-grade security, and
+              user-centric design principles.
             </p>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="flex justify-center gap-4">
+          <motion.div
+            variants={itemVariants}
+            className="flex justify-center gap-4"
+          >
             <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3">
               <Rocket className="w-4 h-4 mr-2" />
               Get Started
             </Button>
-            <Button variant="outline" className="border-slate-300 hover:bg-slate-50 px-8 py-3">
+            <Button
+              variant="outline"
+              className="border-slate-300 hover:bg-slate-50 px-8 py-3"
+            >
               <Github className="w-4 h-4 mr-2" />
               View Source
             </Button>
@@ -188,7 +249,9 @@ export default function About() {
                   <div className="flex justify-center mb-2 text-blue-600">
                     {stat.icon}
                   </div>
-                  <div className="text-3xl font-bold text-slate-800 mb-1">{stat.number}</div>
+                  <div className="text-3xl font-bold text-slate-800 mb-1">
+                    {stat.number}
+                  </div>
                   <div className="text-sm text-slate-600">{stat.label}</div>
                 </CardContent>
               </Card>
@@ -204,10 +267,15 @@ export default function About() {
           className="space-y-12"
         >
           <motion.div variants={itemVariants} className="text-center">
-            <Badge className="bg-blue-100 text-blue-600 mb-4">Core Features</Badge>
-            <h2 className="text-4xl font-bold text-slate-800 mb-4">Engineering Excellence</h2>
+            <Badge className="bg-blue-100 text-blue-600 mb-4">
+              Core Features
+            </Badge>
+            <h2 className="text-4xl font-bold text-slate-800 mb-4">
+              Engineering Excellence
+            </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Built with modern software engineering principles, focusing on maintainability, security, and user experience.
+              Built with modern software engineering principles, focusing on
+              maintainability, security, and user experience.
             </p>
           </motion.div>
 
@@ -217,19 +285,25 @@ export default function About() {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -5 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={{ type: 'spring', stiffness: 300 }}
               >
                 <Card className="h-full bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
                   <CardHeader>
                     <div className="flex items-center gap-4">
-                      <div className={`p-3 bg-gradient-to-r ${feature.color} rounded-xl text-white group-hover:scale-110 transition-transform`}>
+                      <div
+                        className={`p-3 bg-gradient-to-r ${feature.color} rounded-xl text-white group-hover:scale-110 transition-transform`}
+                      >
                         {feature.icon}
                       </div>
-                      <CardTitle className="text-xl text-slate-800">{feature.title}</CardTitle>
+                      <CardTitle className="text-xl text-slate-800">
+                        {feature.title}
+                      </CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-slate-600 leading-relaxed">{feature.description}</p>
+                    <p className="text-slate-600 leading-relaxed">
+                      {feature.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -245,10 +319,15 @@ export default function About() {
           className="space-y-8"
         >
           <motion.div variants={itemVariants} className="text-center">
-            <Badge className="bg-purple-100 text-purple-600 mb-4">Technology Stack</Badge>
-            <h2 className="text-4xl font-bold text-slate-800 mb-4">Built with Modern Tools</h2>
+            <Badge className="bg-purple-100 text-purple-600 mb-4">
+              Technology Stack
+            </Badge>
+            <h2 className="text-4xl font-bold text-slate-800 mb-4">
+              Built with Modern Tools
+            </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Leveraging the latest technologies to deliver a robust, scalable, and maintainable application.
+              Leveraging the latest technologies to deliver a robust, scalable,
+              and maintainable application.
             </p>
           </motion.div>
 
@@ -262,11 +341,17 @@ export default function About() {
                       whileHover={{ scale: 1.05 }}
                       className="text-center group"
                     >
-                      <div className={`w-16 h-16 ${tech.color} rounded-xl mx-auto mb-3 flex items-center justify-center text-2xl group-hover:shadow-lg transition-all duration-300`}>
+                      <div
+                        className={`w-16 h-16 ${tech.color} rounded-xl mx-auto mb-3 flex items-center justify-center text-2xl group-hover:shadow-lg transition-all duration-300`}
+                      >
                         {tech.icon}
                       </div>
-                      <p className="font-semibold text-slate-800">{tech.name}</p>
-                      <p className="text-sm text-slate-600">{tech.description}</p>
+                      <p className="font-semibold text-slate-800">
+                        {tech.name}
+                      </p>
+                      <p className="text-sm text-slate-600">
+                        {tech.description}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -283,10 +368,15 @@ export default function About() {
           className="space-y-8"
         >
           <motion.div variants={itemVariants} className="text-center">
-            <Badge className="bg-green-100 text-green-600 mb-4">Software Engineering</Badge>
-            <h2 className="text-4xl font-bold text-slate-800 mb-4">Development Principles</h2>
+            <Badge className="bg-green-100 text-green-600 mb-4">
+              Software Engineering
+            </Badge>
+            <h2 className="text-4xl font-bold text-slate-800 mb-4">
+              Development Principles
+            </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Following industry best practices and software engineering methodologies for reliable, maintainable code.
+              Following industry best practices and software engineering
+              methodologies for reliable, maintainable code.
             </p>
           </motion.div>
 
@@ -298,8 +388,12 @@ export default function About() {
                     <div className="flex justify-center mb-4 text-green-600">
                       {principle.icon}
                     </div>
-                    <h3 className="font-bold text-lg text-slate-800 mb-2">{principle.title}</h3>
-                    <p className="text-slate-600 text-sm">{principle.description}</p>
+                    <h3 className="font-bold text-lg text-slate-800 mb-2">
+                      {principle.title}
+                    </h3>
+                    <p className="text-slate-600 text-sm">
+                      {principle.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -315,8 +409,12 @@ export default function About() {
           className="space-y-8"
         >
           <motion.div variants={itemVariants} className="text-center">
-            <Badge className="bg-orange-100 text-orange-600 mb-4">How It Works</Badge>
-            <h2 className="text-4xl font-bold text-slate-800 mb-4">Simple & Powerful</h2>
+            <Badge className="bg-orange-100 text-orange-600 mb-4">
+              How It Works
+            </Badge>
+            <h2 className="text-4xl font-bold text-slate-800 mb-4">
+              Simple & Powerful
+            </h2>
           </motion.div>
 
           <motion.div variants={itemVariants}>
@@ -324,15 +422,34 @@ export default function About() {
               <CardContent className="p-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {[
-                    { step: "1", title: "Setup & Secure", description: "Create your account with enterprise-grade security" },
-                    { step: "2", title: "Track & Analyze", description: "Log transactions with AI-powered categorization" },
-                    { step: "3", title: "Achieve & Celebrate", description: "Reach your financial goals with smart insights" }
+                    {
+                      step: '1',
+                      title: 'Setup & Secure',
+                      description:
+                        'Create your account with enterprise-grade security',
+                    },
+                    {
+                      step: '2',
+                      title: 'Track & Analyze',
+                      description:
+                        'Log transactions with AI-powered categorization',
+                    },
+                    {
+                      step: '3',
+                      title: 'Achieve & Celebrate',
+                      description:
+                        'Reach your financial goals with smart insights',
+                    },
                   ].map((item, index) => (
                     <div key={index} className="text-center relative">
                       <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg">
-                        <span className="text-white font-bold text-xl">{item.step}</span>
+                        <span className="text-white font-bold text-xl">
+                          {item.step}
+                        </span>
                       </div>
-                      <h3 className="font-bold text-xl text-slate-800 mb-2">{item.title}</h3>
+                      <h3 className="font-bold text-xl text-slate-800 mb-2">
+                        {item.title}
+                      </h3>
                       <p className="text-slate-600">{item.description}</p>
                       {index < 2 && (
                         <ArrowRight className="hidden md:block absolute top-8 -right-4 w-6 h-6 text-orange-400" />
@@ -360,24 +477,34 @@ export default function About() {
                     <Coffee className="w-10 h-10" />
                   </div>
                 </div>
-                
-                <h2 className="text-3xl font-bold mb-4">Crafted with Passion</h2>
+
+                <h2 className="text-3xl font-bold mb-4">
+                  Crafted with Passion
+                </h2>
                 <p className="text-slate-300 max-w-3xl mx-auto mb-8 text-lg">
-                  This project represents the intersection of modern software engineering, user experience design, 
-                  and personal finance management. Built as a demonstration of full-stack development capabilities 
-                  while solving real-world financial tracking challenges.
+                  This project represents the intersection of modern software
+                  engineering, user experience design, and personal finance
+                  management. Built as a demonstration of full-stack development
+                  capabilities while solving real-world financial tracking
+                  challenges.
                 </p>
-                
+
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
                     <Mail className="w-4 h-4 mr-2" />
                     Contact Developer
                   </Button>
-                  <Button variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-800 px-8 py-3">
+                  <Button
+                    variant="outline"
+                    className="border-slate-600 text-slate-300 hover:bg-slate-800 px-8 py-3"
+                  >
                     <Github className="w-4 h-4 mr-2" />
                     View Source Code
                   </Button>
-                  <Button variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-800 px-8 py-3">
+                  <Button
+                    variant="outline"
+                    className="border-slate-600 text-slate-300 hover:bg-slate-800 px-8 py-3"
+                  >
                     <Globe className="w-4 h-4 mr-2" />
                     Portfolio
                   </Button>
@@ -386,7 +513,10 @@ export default function About() {
                 <div className="pt-8 mt-8 border-t border-slate-700">
                   <div className="flex items-center justify-center gap-2 text-slate-400">
                     <Lightbulb className="w-4 h-4" />
-                    <span className="text-sm">Built for Learning • Designed for Impact • Engineered for Scale</span>
+                    <span className="text-sm">
+                      Built for Learning • Designed for Impact • Engineered for
+                      Scale
+                    </span>
                   </div>
                 </div>
               </CardContent>

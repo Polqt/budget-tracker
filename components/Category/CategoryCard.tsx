@@ -6,16 +6,7 @@ import {
 } from 'lucide-react';
 import { Card, CardContent } from '../ui/card';
 import categoryIcons from './categoryIcons';
-
-export interface Category {
-  id: number;
-  name: string;
-  type: 'income' | 'expense';
-  icon: string;
-  color: string;
-  totalAmount: number;
-  transactionCount: number;
-}
+import { Category } from '@/types/category';
 
 interface CategoryCardProps {
   category: Category;

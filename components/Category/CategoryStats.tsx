@@ -1,16 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Tag, TrendingDown, TrendingUp } from 'lucide-react';
-
-interface Category {
-  id: number;
-  name: string;
-  type: 'income' | 'expense';
-  icon: string;
-  color: string;
-  totalAmount: number;
-  transactionCount: number;
-}
+import { Category } from '@/types/category';
 
 interface CategoryStatsProps {
   categories: Category[];
