@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { TransactionService } from '@/src/services/transactionService';
-import {
-  TransactionSchema,
-  TransactionQuerySchema,
-} from '@/src/types/database';
+import { CategoryService } from '@/src/services/categoryService';
+import { CategorySchema, CategoryQuerySchema } from '@/src/types/database';
 
 /**
- * GET /api/transactions
- * Fetch all transactions for the authenticated user with filtering and pagination
+ * GET /api/categories
+ * Fetch all categories for the authenticated user with filtering and pagination
  */
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
@@ -33,10 +30,10 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     // Parse and validate query parameters
     const url = new URL(req.url);
     const queryParams = Object.fromEntries(url.searchParams.entries());
-    const query = TransactionQuerySchema.parse(queryParams);
+    const query = CategoryQuerySchema.parse(queryParams);
 
-    // Fetch transactions
-    const { transactions, total } = await TransactionService.getTransactions(
+    // Fetch categories
+    const { categories, total } = await CategoryService.getCategories(
       user.id,
       query,
     );
@@ -45,7 +42,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     return NextResponse.json({
       success: true,
-      data: transactions,
+      data: categories,
       pagination: {
         page: query.page,
         limit: query.limit,
@@ -54,7 +51,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       },
     });
   } catch (error) {
-    console.error('GET /api/transactions error:', error);
+    console.error('GET /api/categories error:', error);
 
     if (error instanceof Error && error.message.includes('Validation')) {
       return NextResponse.json(
@@ -67,7 +64,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       {
         success: false,
         error: 'Internal server error',
-        message: 'Failed to fetch transactions',
+        message: 'Failed to fetch categories',
       },
       { status: 500 },
     );
@@ -75,8 +72,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 }
 
 /**
- * POST /api/transactions
- * Create a new transaction for the authenticated user
+ * POST /api/categories
+ * Create a new category for the authenticated user
  */
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
@@ -100,30 +97,30 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     // Parse and validate request body
     const body = await req.json();
-    const validatedData = TransactionSchema.parse(body);
+    const validatedData = CategorySchema.parse(body);
 
-    // Create transaction with proper type conversion
-    const transaction = await TransactionService.createTransaction(user.id, {
+    // Create category
+    const category = await CategoryService.createCategory(user.id, {
       ...validatedData,
-      amount: validatedData.amount.toString(),
+      budget: validatedData.budget?.toString() || null,
     });
 
     return NextResponse.json(
       {
         success: true,
-        data: transaction,
-        message: 'Transaction created successfully',
+        data: category,
+        message: 'Category created successfully',
       },
       { status: 201 },
     );
   } catch (error) {
-    console.error('POST /api/transactions error:', error);
+    console.error('POST /api/categories error:', error);
 
     if (error instanceof Error) {
-      if (error.message.includes('Category not found')) {
+      if (error.message.includes('already exists')) {
         return NextResponse.json(
-          { success: false, error: 'Not found', message: error.message },
-          { status: 404 },
+          { success: false, error: 'Conflict', message: error.message },
+          { status: 409 },
         );
       }
 
@@ -143,7 +140,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       {
         success: false,
         error: 'Internal server error',
-        message: 'Failed to create transaction',
+        message: 'Failed to create category',
       },
       { status: 500 },
     );
