@@ -83,7 +83,7 @@ const CommonEnums = {
   status: z.enum(['completed', 'pending', 'failed']),
   priority: z.enum(['low', 'medium', 'high']),
   categoryStatus: z.enum(['active', 'inactive', 'archived']),
-  period: z.enum(['daily', 'weekly', 'monthly', 'yearly']),
+  period: z.enum(['weekly', 'monthly', 'yearly']), // Removed 'daily' to match schema
   theme: z.enum(['light', 'dark', 'system']),
   sortOrder: z.enum(['asc', 'desc']),
 };

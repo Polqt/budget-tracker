@@ -1,11 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { TransactionService } from '@/src/services/transactionService';
+import { transactionService } from '@/src/services';
 
-/**
- * GET /api/transactions/analytics
- * Get transaction analytics for the authenticated user
- */
 export async function GET(): Promise<NextResponse> {
   try {
     // Authenticate user
@@ -33,7 +29,7 @@ export async function GET(): Promise<NextResponse> {
     // const endDate = url.searchParams.get('endDate');
 
     // Get transaction analytics
-    const analytics = await TransactionService.getTransactionStats(user.id);
+    const analytics = await transactionService.getStats(user.id);
 
     return NextResponse.json({
       success: true,

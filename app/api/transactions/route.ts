@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { TransactionService } from '@/src/services/transactionService';
+import { transactionService } from '@/src/services';
 import {
   TransactionSchema,
   TransactionQuerySchema,
 } from '@/src/types/database';
 
-/**
- * GET /api/transactions
- * Fetch all transactions for the authenticated user with filtering and pagination
- */
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     // Authenticate user
@@ -36,7 +32,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const query = TransactionQuerySchema.parse(queryParams);
 
     // Fetch transactions
-    const { transactions, total } = await TransactionService.getTransactions(
+    const { transactions, total } = await transactionService.getTransactions(
       user.id,
       query,
     );
@@ -74,10 +70,6 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   }
 }
 
-/**
- * POST /api/transactions
- * Create a new transaction for the authenticated user
- */
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     // Authenticate user
@@ -103,7 +95,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const validatedData = TransactionSchema.parse(body);
 
     // Create transaction with proper type conversion
-    const transaction = await TransactionService.createTransaction(user.id, {
+    const transaction = await transactionService.createTransaction(user.id, {
       ...validatedData,
       amount: validatedData.amount.toString(),
     });

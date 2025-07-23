@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { TransactionService } from '@/src/services/transactionService';
+import { transactionService } from '@/src/services';
 import { TransactionSchema } from '@/src/types/database';
 
-/**
- * GET /api/transactions/[id]
- * Fetch a specific transaction by ID for the authenticated user
- */
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } },
@@ -33,7 +29,7 @@ export async function GET(
     const { id } = params;
 
     // Fetch transaction
-    const transaction = await TransactionService.getTransactionById(
+    const transaction = await transactionService.getTransactionById(
       user.id,
       id,
     );
@@ -101,7 +97,7 @@ export async function PUT(
     const validatedData = TransactionSchema.partial().parse(body);
 
     // Update transaction
-    const transaction = await TransactionService.updateTransaction(
+    const transaction = await transactionService.updateTransaction(
       user.id,
       id,
       {
@@ -160,10 +156,6 @@ export async function PUT(
   }
 }
 
-/**
- * DELETE /api/transactions/[id]
- * Delete a specific transaction by ID for the authenticated user
- */
 export async function DELETE(
   req: NextRequest,
   { params }: { params: { id: string } },
@@ -190,7 +182,7 @@ export async function DELETE(
     const { id } = params;
 
     // Delete transaction
-    const success = await TransactionService.deleteTransaction(user.id, id);
+    const success = await transactionService.deleteTransaction(user.id, id);
 
     if (!success) {
       return NextResponse.json(

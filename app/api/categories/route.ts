@@ -3,10 +3,6 @@ import { createClient } from '@/utils/supabase/server';
 import { categoryService } from '@/src/services';
 import { CategorySchema, CategoryQuerySchema } from '@/src/types/database';
 
-/**
- * GET /api/categories
- * Fetch all categories for the authenticated user with filtering and pagination
- */
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     // Authenticate user
@@ -71,10 +67,6 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   }
 }
 
-/**
- * POST /api/categories
- * Create a new category for the authenticated user
- */
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     // Authenticate user

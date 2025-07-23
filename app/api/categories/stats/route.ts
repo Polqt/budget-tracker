@@ -1,11 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { CategoryService } from '@/src/services/categoryService';
+import { categoryService } from '@/src/services';
 
-/**
- * GET /api/categories/stats
- * Get category statistics for the authenticated user
- */
 export async function GET(): Promise<NextResponse> {
   try {
     // Authenticate user
@@ -32,7 +28,7 @@ export async function GET(): Promise<NextResponse> {
     // const endDate = url.searchParams.get('endDate');
 
     // Get category statistics
-    const stats = await CategoryService.getCategoryStats(user.id);
+    const stats = await categoryService.getStats(user.id);
 
     return NextResponse.json({
       success: true,

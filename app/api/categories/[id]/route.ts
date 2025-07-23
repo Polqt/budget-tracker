@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { CategoryService } from '@/src/services/categoryService';
+import { categoryService } from '@/src/services';
 import { CategorySchema } from '@/src/types/database';
 
-/**
- * GET /api/categories/[id]
- * Fetch a specific category by ID for the authenticated user
- */
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } },
@@ -33,7 +29,7 @@ export async function GET(
     const { id } = params;
 
     // Fetch category
-    const category = await CategoryService.getCategoryById(user.id, id);
+    const category = await categoryService.getCategoryById(user.id, id);
 
     if (!category) {
       return NextResponse.json(
@@ -60,10 +56,6 @@ export async function GET(
   }
 }
 
-/**
- * PUT /api/categories/[id]
- * Update a specific category by ID for the authenticated user
- */
 export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } },
@@ -94,7 +86,7 @@ export async function PUT(
     const validatedData = CategorySchema.partial().parse(body);
 
     // Update category
-    const category = await CategoryService.updateCategory(user.id, id, {
+    const category = await categoryService.updateCategory(user.id, id, {
       ...validatedData,
       budget: validatedData.budget?.toString() || undefined,
     });
@@ -175,7 +167,7 @@ export async function DELETE(
     const { id } = params;
 
     // Delete category
-    const success = await CategoryService.deleteCategory(user.id, id);
+    const success = await categoryService.deleteCategory(user.id, id);
 
     if (!success) {
       return NextResponse.json(
