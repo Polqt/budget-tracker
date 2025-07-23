@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { CategoryService } from '@/src/services/categoryService';
+import { categoryService } from '@/src/services';
 import { CategorySchema, CategoryQuerySchema } from '@/src/types/database';
 
 /**
@@ -33,7 +33,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const query = CategoryQuerySchema.parse(queryParams);
 
     // Fetch categories
-    const { categories, total } = await CategoryService.getCategories(
+    const { categories, total } = await categoryService.getCategories(
       user.id,
       query,
     );
@@ -100,7 +100,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const validatedData = CategorySchema.parse(body);
 
     // Create category
-    const category = await CategoryService.createCategory(user.id, {
+    const category = await categoryService.createCategory(user.id, {
       ...validatedData,
       budget: validatedData.budget?.toString() || null,
     });
